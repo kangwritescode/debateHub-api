@@ -59,6 +59,9 @@ const getPlacesByUserId = async (req, res, next) => {
 };
 
 const createPlace = async (req, res, next) => {
+
+
+  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return next(
@@ -67,6 +70,8 @@ const createPlace = async (req, res, next) => {
   }
 
   const { title, description, address, creator } = req.body;
+
+  
 
   let coordinates;
   try {
@@ -87,6 +92,7 @@ const createPlace = async (req, res, next) => {
     image: req.file.path,
     creator
   });
+  
 
   let user;
   try {
@@ -104,7 +110,6 @@ const createPlace = async (req, res, next) => {
     return next(error);
   }
 
-  console.log(user);
 
   try {
     const sess = await mongoose.startSession();
